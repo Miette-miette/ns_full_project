@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Concert;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class ConcertController extends AbstractController
 {
-    #[Route('/concert', name: 'app_concert')]
-    public function index(): Response
+    #[Route('/concert', name: 'create_concert')]
+    public function createDataConcert(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('concert/index.html.twig', [
-            'controller_name' => 'ConcertController',
-        ]);
+        $concert = new Concert();
+        $concert->
+
     }
+    
 }
