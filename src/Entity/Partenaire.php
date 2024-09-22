@@ -5,10 +5,12 @@ namespace App\Entity;
 use App\Repository\PartenaireRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\UX\Turbo\Attribute\Broadcast;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 #[ORM\Entity(repositoryClass: PartenaireRepository::class)]
-#[Broadcast]
+#[Vich\Uploadable]
 class Partenaire
 {
     #[ORM\Id]
@@ -25,8 +27,17 @@ class Partenaire
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $content = null;
 
-    #[ORM\Column(type: Types::BLOB, nullable: true)]
-    private $img;
+    // NOTE: This is not a mapped field of entity metadata, just a simple property.
+    #[Vich\UploadableField(mapping: 'ns_img', fileNameProperty: 'imageName' )]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $img = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
+    //GETTER ET SETTER
 
     public function getId(): ?int
     {
@@ -69,15 +80,38 @@ class Partenaire
         return $this;
     }
 
-    public function getImg()
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
     {
-        return $this->img;
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
-    public function setImg($img): static
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $img): void
     {
         $this->img = $img;
+    }
 
-        return $this;
+    public function getImageName(): ?string
+    {
+        return $this->img;
     }
 }
