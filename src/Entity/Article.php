@@ -19,10 +19,10 @@ class Article
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
     private ?string $chapeau = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 6000, nullable: true)]
     private ?string $content = null;
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -34,6 +34,9 @@ class Article
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $sous_titre = null;
 
     public function getId(): ?int
     {
@@ -109,6 +112,18 @@ class Article
     public function getImageName(): ?string
     {
         return $this->img;
+    }
+
+    public function getSousTitre(): ?string
+    {
+        return $this->sous_titre;
+    }
+
+    public function setSousTitre(?string $sous_titre): static
+    {
+        $this->sous_titre = $sous_titre;
+
+        return $this;
     }
 
 }

@@ -29,7 +29,7 @@ class Atelier
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $end_datetime = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 6000, nullable: true)]
     private ?string $content = null;
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.

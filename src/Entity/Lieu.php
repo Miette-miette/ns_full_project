@@ -20,7 +20,7 @@ class Lieu
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 6000, nullable: true)]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -38,6 +38,9 @@ class Lieu
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $type_de_lieu = null;
 
     //GETTER ET SETTER
 
@@ -127,5 +130,17 @@ class Lieu
     public function getImageName(): ?string
     {
         return $this->img;
+    }
+
+    public function getTypeDeLieu(): ?string
+    {
+        return $this->type_de_lieu;
+    }
+
+    public function setTypeDeLieu(?string $type_de_lieu): static
+    {
+        $this->type_de_lieu = $type_de_lieu;
+
+        return $this;
     }
 }

@@ -24,7 +24,7 @@ class Partenaire
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $type = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 6000, nullable: true)]
     private ?string $content = null;
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.

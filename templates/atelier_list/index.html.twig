@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste Atelier{% endblock %}
+
+{% block body %}
+<main>
+    <h1>Liste des Ateliers</h1>
+
+    <table class="table table-hover">
+        {% for ateliers in atelier %}
+            <thead>
+                <th>Atelier {{ateliers.id}}</th>
+            </thead>
+            <tbody class="d-flex flex-row">
+                <tr class="table-primary d-flex flex-column">
+                    <td>{{ateliers.titre}}</td>
+                    <td>{{ateliers.lieu}}</td>
+                    <td>{{ateliers.beginDatetime|format_datetime()}}</td>
+                    <td>{{ateliers.endDatetime|format_datetime()}}</td>
+                    <td>{{ateliers.content}}</td>
+                    
+                </tr>
+                <tr class="table-primary d-flex flex-column">
+                    <td><img src="{{vich_uploader_asset(ateliers, 'imageFile')}}" width="200px"></td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+</main>
+{% endblock %}

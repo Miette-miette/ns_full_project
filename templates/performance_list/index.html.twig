@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste Performances{% endblock %}
+
+{% block body %}
+<main>
+    <h1>Liste des Performances</h1>
+
+    <table class="table table-hover">
+        {% for performances in performance %}
+            <thead>
+                <th>Performance {{performances.id}}</th>
+            </thead>
+            <tbody class="d-flex flex-row">
+                <tr class="table-primary d-flex flex-column">
+                    <td>{{performances.titre}}</td>
+                    <td>{{performances.lieu}}</td>
+                    <td>{{performances.beginDatetime|format_datetime()}}</td>
+                    <td>{{performances.endDatetime|format_datetime()}}</td>
+                    <td>{{performances.content}}</td>
+                    
+                </tr>
+                <tr class="table-primary d-flex flex-column">
+                    <td><img src="{{vich_uploader_asset(performances, 'imageFile')}}" width="200px"></td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+</main>
+{% endblock %}

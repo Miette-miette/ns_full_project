@@ -1,6 +1,11 @@
 <?php
 
+/* Autoriser requete CORS */
+header('Access-Control-Allow-Origin: *');
+
 use App\Kernel;
+
+
 
 require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 

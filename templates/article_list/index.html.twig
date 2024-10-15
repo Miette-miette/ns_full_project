@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleListController!{% endblock %}
+
+{% block body %}
+
+<main>
+    <h1>Liste des Articles</h1>
+
+    <table class="table table-hover">
+        {% for article in articles %}
+            <thead>
+                <th>Article {{article.id}}</th>
+            </thead>
+            <tbody class="d-flex flex-row">
+                <tr class="table-primary d-flex flex-column">
+                    <td>{{article.titre}}</td>
+                    <td>{{article.sousTitre}}</td>
+                    <td>{{article.chapeau}}</td>
+                    <td>{{article.content}}</td>
+                    
+                </tr>
+                <tr class="table-primary d-flex flex-column">
+                    <td><img src="{{vich_uploader_asset(article, 'imageFile')}}" width="200px"></td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+</main>
+{% endblock %}

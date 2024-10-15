@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste Concerts{% endblock %}
+
+{% block body %}
+
+
+<main>
+    <h1>Listes des concerts</h1>
+
+    <table class="table table-hover">
+        {% for concert in concerts %}
+            <thead>
+                <th>Concert {{concert.id}}</th>
+            </thead>
+            <tbody class="d-flex flex-row">  
+                <tr class="table-primary d-flex flex-column">
+                    <td>{{concert.titre}}</td>
+                    <td>{{concert.lieu}}</td>
+                    <td>{{concert.beginDatetime|format_datetime()}}</td>
+                    <td>{{concert.endDatetime|format_datetime()}}</td>
+                    <td>{{concert.content}}</td>
+                
+                    
+                </tr>
+
+                <tr class="table-primary d-flex flex-column">
+                    <td><img src="{{vich_uploader_asset(concert, 'imageFile')}}" width="200px"></td>
+                    <td><input type="button" value="Modifier la fiche"></td>
+                </tr>
+            </tbody>
+        {% endfor %}    
+    </table>
+</main>
+
+
+{% endblock %}

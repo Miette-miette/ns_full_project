@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Caprasimo&display=swap');
 
 body{
-    background: #FFE3B0 !important
+    background: #FFE3B0 !important;
+    
+}
+
+main{
+    margin: 1em auto;
+    max-width: 1000px !important;
+    width: 95%;
 }
 
 h1{
@@ -24,7 +31,6 @@ h2{
 h3{
     font-family: "Afacad", sans-serif;
     font-optical-sizing: auto;
-    text-align: center;
     color: #3f292e;
 }
 
@@ -70,4 +76,48 @@ button:hover, .button-style:hover{
 
 .active{
     background-color:#8f505e;
+}
+
+.navbar{
+    background-color:#E47161;
+}
+
+tr{
+    margin-bottom:20px;
+}
+
+tbody{
+    background-color: beige;
+    padding: 2%;
+    margin: 1%;
+    border-radius: 8px;
+    font-family: "Afacad", sans-serif;
+    font-optical-sizing: auto;
+    color:#492E34;
+    border:#492E34 2px solid ;
+    justify-content: center;
+    filter: drop-shadow(2px 4px 4px #492E34);
+    vertical-align: bottom;
+    
+}
+
+.table thead th {
+    border-bottom: none;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: none;
+}
+
+.table-primary, .table-primary>th, .table-primary>td {
+    background-color: transparent; 
+}
+
+td{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
 }

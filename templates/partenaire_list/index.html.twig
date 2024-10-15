@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PartenaireListController!{% endblock %}
+
+{% block body %}
+
+<main>
+    <h1>Liste des Partenaires</h1>
+
+    <table class="table table-hover">
+        {% for partenaires in partenaire %}
+            <thead>
+                <th><h2>Partenaire {{partenaires.id}}</h2></th>
+            </thead>
+            <tbody class="d-flex flex-row">
+                <tr class="table-primary d-flex flex-column">
+                    <td>
+                        <h3>Nom du partenaire:</h3> 
+                        <p class="title">{{partenaires.titre}}</p>
+                    </td>
+                    <td>
+                        <h3>Type:</h3>
+                        <p class="type">{{partenaires.type}}</p>
+                    </td>
+                    <td>
+                        <h3>Description:</h3>
+                        <p class="description">{{partenaires.content}}</p>
+                    </td>
+                    
+                </tr>
+                <tr class="table-primary d-flex flex-column">
+                    <td>
+                        <h3>Image:</h3>
+                        <img src="{{vich_uploader_asset(partenaires, 'imageFile')}}" width="200px" >
+                    </td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+</main>
+
+{% endblock %}

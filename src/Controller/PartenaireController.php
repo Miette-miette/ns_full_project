@@ -6,7 +6,7 @@ use App\Entity\Partenaire;
 use App\Form\CreatePartenaireType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -29,6 +29,6 @@ class PartenaireController extends AbstractController
             return new Response("Partenaire ajouté!");
         }
 
-        return $this->render('creation\create_data.html.twig',['form' => $form->createView()]);
+        return $this->render('partenaire\index.html.twig',['form' => $form->createView()]);
     }
 }

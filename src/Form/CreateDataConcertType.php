@@ -20,7 +20,7 @@ class CreateDataConcertType extends AbstractType
                 'label' => "Nom de l'artiste/ groupe"
             ])
             ->add('lieu',  TextType::class,[
-                'label' => "Scene où à lieu le concert"
+                'label' => "Scene où se déroule le concert"
             ])
             ->add('begin_datetime', null, [
                 'widget' => 'single_text',
