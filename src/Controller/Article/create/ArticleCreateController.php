@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Article\create;
 
 use App\Entity\Article;
 use App\Form\CreateArticleType;
@@ -11,9 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 
-class ArticleController extends AbstractController
+class ArticleCreateController extends AbstractController
 {
-    #[Route('/article', name: 'article')]
+    #[Route('/article/create', name: 'article_create')]
+
+    // Fonction de creation d'article
+
     public function createDataArticle(EntityManagerInterface $entityManager,Request $request)
     {
         $article = new Article();

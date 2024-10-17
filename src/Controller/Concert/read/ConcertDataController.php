@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Concert\read;
 
 use App\Repository\ConcertRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-class ConcertListController extends AbstractController
+class ConcertDataController extends AbstractController
 {
     #[Route('/concert/list', name: 'app_concert_list')]
     public function index(ConcertRepository $repository): Response
@@ -28,12 +28,4 @@ class ConcertListController extends AbstractController
         return $this->json($concerts); /*$serializer->serialize(, 'json'));*/
         
     }
-    /*public function list(ConcertRepository $repository): Response
-    {
-        $concerts= $repository->findAll();
-
-        return $this->render('concert_list/index.html.twig', [
-            'concerts' =>$concerts]);
-
-    }*/
 }

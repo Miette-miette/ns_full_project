@@ -22,9 +22,13 @@
                 </tr>
                 <tr class="table-primary d-flex flex-column">
                     <td><img src="{{vich_uploader_asset(article, 'imageFile')}}" width="200px"></td>
+                    <td><input type="button" value="Modifier la fiche"></td>
                 </tr>
             </tbody>
         {% endfor %}
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(articles) }}
+    </div>
 </main>
 {% endblock %}

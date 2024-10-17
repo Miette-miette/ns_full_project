@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Performance\create;
 
-use App\Entity\Concert;
-use App\Form\CreateDataConcertType;
+use App\Entity\Performance;
+use App\Form\CreatePerformanceType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class ConcertController extends AbstractController
+class PerformanceCreateController extends AbstractController
 {
-    #[Route('/concert', name: 'create_concert')]
-    public function createDataConcert(EntityManagerInterface $entityManager,Request $request)
+    #[Route('/performance/create', name: 'app_performance/create')]
+    public function createDataPerformance(EntityManagerInterface $entityManager,Request $request)
     {
-        $concert = new Concert();
-        $form = $this->createForm(CreateDataConcertType::class, $concert);
+        $concert = new Performance();
+        $form = $this->createForm(CreatePerformanceType::class, $concert);
 
         $form->handleRequest($request);
 
@@ -26,10 +26,9 @@ class ConcertController extends AbstractController
             $entityManager->persist($concertData);
             $entityManager->flush();
 
-            return new Response("Concert ajouté!");
+            return new Response("Performance ajouté!");
         }
 
         return $this->render('creation\create_data.html.twig',['form' => $form->createView()]);
     }
-    
 }

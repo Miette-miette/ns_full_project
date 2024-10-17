@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Concert\create;
 
-use App\Entity\Lieu;
-use App\Form\CreateLieuType;
+use App\Entity\Concert;
+use App\Form\CreateDataConcertType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class LieuController extends AbstractController
+class ConcertCreateController extends AbstractController
 {
-    #[Route('/lieu', name: 'app_lieu')]
-    public function createDataLieu(EntityManagerInterface $entityManager,Request $request)
+    #[Route('/concert', name: 'create_concert')]
+    public function createDataConcert(EntityManagerInterface $entityManager,Request $request)
     {
-        $concert = new Lieu();
-        $form = $this->createForm(CreateLieuType::class, $concert);
+        $concert = new Concert();
+        $form = $this->createForm(CreateDataConcertType::class, $concert);
 
         $form->handleRequest($request);
 
@@ -26,9 +26,10 @@ class LieuController extends AbstractController
             $entityManager->persist($concertData);
             $entityManager->flush();
 
-            return new Response("Lieu ajouté!");
+            return new Response("Concert ajouté!");
         }
 
         return $this->render('creation\create_data.html.twig',['form' => $form->createView()]);
     }
+    
 }

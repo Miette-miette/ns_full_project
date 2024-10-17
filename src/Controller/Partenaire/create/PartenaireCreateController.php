@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Partenaire\create;
 
 use App\Entity\Partenaire;
 use App\Form\CreatePartenaireType;
@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class PartenaireController extends AbstractController
+class PartenaireCreateController extends AbstractController
 {
-    #[Route('/partenaire', name: 'app_partenaire')]
+    #[Route('/partenaire/create', name: 'app_partenaire_create')]
     public function createDataPartenaire(EntityManagerInterface $entityManager,Request $request)
     {
         $concert = new Partenaire();

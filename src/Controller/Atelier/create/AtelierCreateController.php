@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Atelier\create;
 
 use App\Entity\Atelier;
 use App\Form\CreateAtelierType;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class AtelierController extends AbstractController
+class AtelierCreateController extends AbstractController
 {
     #[Route('/atelier', name: 'app_atelier')]
     public function createDataAtelier(EntityManagerInterface $entityManager,Request $request)
