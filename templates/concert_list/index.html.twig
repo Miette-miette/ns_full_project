@@ -15,11 +15,25 @@
             </thead>
             <tbody class="d-flex flex-row">  
                 <tr class="table-primary d-flex flex-column">
-                    <td>{{concert.titre}}</td>
-                    <td>{{concert.lieu}}</td>
-                    <td>{{concert.beginDatetime|format_datetime()}}</td>
-                    <td>{{concert.endDatetime|format_datetime()}}</td>
-                    <td>{{concert.content}}</td>
+                    <td>
+                        <h2>{{concert.titre}}</h2>
+                    </td>
+                    <td>
+                        <h3>Lieu:</h3>
+                        <p>{{concert.lieu}}</p>
+                    </td>
+                    <td>
+                        <h3>Date de début:</h3>
+                        <p>{{concert.beginDatetime|format_datetime()}}</p>
+                    </td>
+                    <td>
+                        <h3>Date de fin:</h3>
+                        <p>{{concert.endDatetime|format_datetime()}}</p>
+                    </td>
+                    <td>
+                        <h3>Description:</h3>
+                        <p>{{concert.content}}</p>
+                    </td>
                 
                     
                 </tr>
@@ -27,10 +41,22 @@
                 <tr class="table-primary d-flex flex-column">
                     <td><img src="{{vich_uploader_asset(concert, 'imageFile')}}" width="200px"></td>
                     <td><input type="button" value="Modifier la fiche"></td>
+                    <td><input type="button" value="Supprimer la fiche"></td>
                 </tr>
             </tbody>
+            
         {% endfor %}    
     </table>
+    <div class="d-flex flex-row">
+        <div class="navigation">
+            {{ knp_pagination_render(concerts) }}
+        </div>
+        <div class="count">
+            <p> Nombre de fiches: {{concerts.getTotalItemCount}}</p>
+        </div>
+
+    </div>
+    
 </main>
 
 

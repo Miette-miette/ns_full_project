@@ -30,6 +30,7 @@ h2{
 
 h3{
     font-family: "Afacad", sans-serif;
+    font-size: 1.5rem;
     font-optical-sizing: auto;
     color: #3f292e;
 }
@@ -120,4 +121,11 @@ td{
     flex-direction: column;
     justify-content: center;
     
+}
+
+.table-hover .table-primary:hover {
+    background-color: transparent;
+}
+.table-hover .table-primary:hover>td, .table-hover .table-primary:hover>th {
+    background-color: transparent;
 }

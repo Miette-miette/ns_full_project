@@ -14,21 +14,36 @@
             </thead>
             <tbody class="d-flex flex-row">
                 <tr class="table-primary d-flex flex-column">
-                    <td>{{article.titre}}</td>
-                    <td>{{article.sousTitre}}</td>
-                    <td>{{article.chapeau}}</td>
-                    <td>{{article.content}}</td>
+                    <td>
+                        <h2>{{article.titre}}</h2>
+                    </td>
+                    <td>
+                        <h3>Sous titre:</h3>
+                        <p>{{article.sousTitre}}</p>
+                    </td>
+                    <td>
+                        <h3>Chapeau:</h3>
+                        <p>{{article.chapeau}}</p>
+                    </td>
+                    <td>
+                        <h3>Contenu:</h3>
+                        <p>{{article.content}}</p>
+                    </td>
                     
                 </tr>
                 <tr class="table-primary d-flex flex-column">
                     <td><img src="{{vich_uploader_asset(article, 'imageFile')}}" width="200px"></td>
                     <td><input type="button" value="Modifier la fiche"></td>
+                    <td><input type="button" value="Supprimer la fiche"></td>
                 </tr>
             </tbody>
         {% endfor %}
     </table>
     <div class="navigation">
         {{ knp_pagination_render(articles) }}
+    </div>
+    <div class="count">
+        <p> Nombre de fiches: {{articles.getTotalItemCount}}</p>
     </div>
 </main>
 {% endblock %}

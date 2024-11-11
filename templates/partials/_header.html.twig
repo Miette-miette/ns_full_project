@@ -8,25 +8,25 @@
                     <ul class="navbar-nav me-auto">
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Création d'article</a>
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Création de fiche</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="..\App\Controller\Article\create">Nouvel article</a>
-                                <a class="dropdown-item" href="#">Nouvel atelier</a>
-                                <a class="dropdown-item" href="#">Nouveau concert</a>
+                                <a class="dropdown-item" href="{{path("app_article_create")}}">Nouvel article</a>
+                                <a class="dropdown-item" href="{{path("app_atelier_create")}}">Nouvel atelier</a>
+                                <a class="dropdown-item" href="{{path("app_concert_create")}}">Nouveau concert</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Separated link</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Listes des articles</a>
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Listes des fiches</a>
                             <div class="dropdown-menu">                          
-                                <a class="dropdown-item" href="#">Ateliers</a>
-                                <a class="dropdown-item" href="#">Concerts</a>
-                                <a class="dropdown-item" href="#">Performances</a>
+                                <a class="dropdown-item" href="{{path("app_atelier_list")}}">Ateliers</a>
+                                <a class="dropdown-item" href="{{path("app_concert_list")}}">Concerts</a>
+                                <a class="dropdown-item" href="{{path("app_performance_list")}}">Performances</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../article/article_data.html.twig">Lieux</a>                                
-                                <a class="dropdown-item" href="#">Partenaires</a>
-                                <a class="dropdown-item" href="#">Articles actualités</a>
+                                <a class="dropdown-item" href="#">Lieux</a>                                
+                                <a class="dropdown-item" href="{{path("app_partenaire_list")}}">Partenaires</a>
+                                <a class="dropdown-item" href="{{path("app_article_list")}}">Articles actualités</a>
                             </div>
                         </li>
                     </ul>

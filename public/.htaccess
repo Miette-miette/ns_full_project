@@ -19,10 +19,19 @@ DirectoryIndex index.php
 
 <IfModule mod_rewrite.c>
 
-    Header always set Access-Control-Allow-Origin "http://localhost:5500"
+    Header always set Access-Control-Allow-Origin "http://localhost:8080"
     Header always set Access-Control-Allow-Credentials "true"
     Header always set Access-Control-Allow-Headers "Content-Type"
     Header always set Content-Type "application/json"
+    Access-Control-Allow-Methods: POST, GET
+    Access-Control-Allow-Headers: X-PINGOTHER, Content-Type
+
+    # Reading JSON POST using PHP
+    $json = file_get_contents('php://input');
+    $jsonObj = json_decode($json);
+
+    # Use $jsonObj
+    print_r($jsonObj->message);
 
 
     RewriteEngine On

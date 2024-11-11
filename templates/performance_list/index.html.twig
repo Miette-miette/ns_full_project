@@ -13,11 +13,24 @@
             </thead>
             <tbody class="d-flex flex-row">
                 <tr class="table-primary d-flex flex-column">
-                    <td>{{performances.titre}}</td>
-                    <td>{{performances.lieu}}</td>
-                    <td>{{performances.beginDatetime|format_datetime()}}</td>
-                    <td>{{performances.endDatetime|format_datetime()}}</td>
-                    <td>{{performances.content}}</td>
+                    <td>
+                        <h2>{{performances.titre}}</h2>
+                    </td>
+                    <td>
+                        <h3>Lieu:</h3>
+                        <p>{{performances.lieu}}</p></td>
+                    <td>
+                        <h3>Date de début:</h3>
+                        <p>{{performances.beginDatetime|format_datetime()}}</p>
+                    </td>
+                    <td>
+                        <h3>Date de fin:</h3>
+                        <p>{{performances.endDatetime|format_datetime()}}</p>
+                    </td>
+                    <td>
+                        <h3>Description:</h3>
+                        <p>{{performances.content}}</p>
+                    </td>
                     
                 </tr>
                 <tr class="table-primary d-flex flex-column">
@@ -27,5 +40,11 @@
             </tbody>
         {% endfor %}
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(performance) }}
+    </div>
+    <div class="count">
+        <p> Nombre de fiches: {{performance.getTotalItemCount}}</p>
+    </div>
 </main>
 {% endblock %}

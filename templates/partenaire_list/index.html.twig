@@ -15,8 +15,7 @@
             <tbody class="d-flex flex-row">
                 <tr class="table-primary d-flex flex-column">
                     <td>
-                        <h3>Nom du partenaire:</h3> 
-                        <p class="title">{{partenaires.titre}}</p>
+                        <h2>{{partenaires.titre}}</h2>
                     </td>
                     <td>
                         <h3>Type:</h3>
@@ -33,11 +32,18 @@
                         <h3>Image:</h3>
                         <img src="{{vich_uploader_asset(partenaires, 'imageFile')}}" width="200px" >
                         <td><input type="button" value="Modifier la fiche"></td>
+                        <td><input type="button" value="Supprimer la fiche"></td>
                     </td>
                 </tr>
             </tbody>
         {% endfor %}
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(partenaire)}}
+    </div>
+    <div class="count">
+        <p> Nombre de fiches: {{partenaire.getTotalItemCount}}</p>
+    </div>
 </main>
 
 {% endblock %}

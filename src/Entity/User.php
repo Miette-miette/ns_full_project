@@ -25,6 +25,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    private ?string $plainPassword = null;
+
     /**
      * @var string The hashed password
      */
@@ -34,22 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $fullName = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
-    }
+    
 
     /**
      * A visual identifier that represents this user.
@@ -118,6 +105,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->fullName = $fullName;
 
+        return $this;
+    }
+    
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+    
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
         return $this;
     }
 }
