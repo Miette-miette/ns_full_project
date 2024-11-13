@@ -35,7 +35,7 @@ class AtelierController extends AbstractController
             return new Response("Article ajouté!");
         }
 
-        return $this->render('creation\create_data.html.twig',['form' => $form->createView()]);
+        return $this->render('creation\create_data.html.twig',['form' => $form->createView(), 'controller_title' => 'Nouvel Atelier']);
     }
 
     #[Route('/atelier/data', name: 'app_atelier_data')]

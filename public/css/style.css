@@ -49,7 +49,7 @@ a{
 }
 
 a:hover{
-    color: #E47161;
+    color:#492E34;
 }
 
 .title{
@@ -128,4 +128,18 @@ td{
 }
 .table-hover .table-primary:hover>td, .table-hover .table-primary:hover>th {
     background-color: transparent;
+}
+
+.wrapper {
+    background-color: beige;
+    padding: 2%;
+    margin: 1% 20%;
+    border-radius: 8px;
+    font-family: "Afacad", sans-serif;
+    font-optical-sizing: auto;
+    color:#492E34;
+    border:#492E34 2px solid ;
+    justify-content: center;
+    filter: drop-shadow(2px 4px 4px #492E34);
+    vertical-align: bottom;
 }

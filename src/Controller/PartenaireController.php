@@ -35,7 +35,7 @@ class PartenaireController extends AbstractController
             return new Response("Partenaire ajouté!");
         }
 
-        return $this->render('partenaire\index.html.twig',['form' => $form->createView()]);
+        return $this->render('partenaire\index.html.twig',['form' => $form->createView(), 'controller_title' => 'Nouveau Partenaire']);
     }
 
     #[Route('/partenaire/data', name: 'app_partenaire_data')]

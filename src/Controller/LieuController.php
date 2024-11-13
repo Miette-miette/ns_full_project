@@ -29,6 +29,6 @@ class LieuController extends AbstractController
             return new Response("Lieu ajouté!");
         }
 
-        return $this->render('creation\create_data.html.twig',['form' => $form->createView()]);
+        return $this->render('creation\create_data.html.twig',['form' => $form->createView(),'controller_title' => 'Nouveau lieu']);
     }
 }

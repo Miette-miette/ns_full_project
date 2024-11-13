@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class PerformanceController extends AbstractController
 {
-    #[Route('/performance/create', name: 'app_performance/create')]
+    #[Route('/performance/create', name: 'app_performance_create')]
     public function createDataPerformance(EntityManagerInterface $entityManager,Request $request)
     {
         $performance = new Performance();
@@ -35,7 +35,7 @@ class PerformanceController extends AbstractController
             return new Response("Performance ajouté!");
         }
 
-        return $this->render('creation\create_data.html.twig',['form' => $form->createView()]);
+        return $this->render('creation\create_data.html.twig',['form' => $form->createView(), 'controller_title' => 'Nouvelle Performance']);
     }
 
     #[Route('/performance/data', name: 'app_performance_data')]

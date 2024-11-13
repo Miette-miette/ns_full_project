@@ -35,7 +35,7 @@ class ConcertController extends AbstractController
             return new Response("Concert ajouté!");
         }
 
-        return $this->render('creation\create_data.html.twig',['form' => $form->createView()]);
+        return $this->render('creation\create_data.html.twig',['form' => $form->createView(), 'controller_title' => 'Nouveau Concert']);
     }
 
     #[Route('/concert/data', name: 'app_concert_data')]
