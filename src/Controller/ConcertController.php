@@ -66,6 +66,27 @@ class ConcertController extends AbstractController
         return $this->render('concert_list/index.html.twig', [
             'concerts' =>$concerts]);
     }
+
+    #[Route('/api/concerts', name: 'api_concerts', methods: ['GET'])]
+    public function getConcertsAPI(ConcertRepository $repository): Response
+    {
+        $concerts = $repository->findAll();
+        $data = [];
+
+        foreach ($concerts as $concert) {
+            $data[] = [
+                'id' => $concert->getId(),
+                'title' => $concert->getTitre(),
+                'location' => $concert->getLieu(),
+                'begin_datetime' => $concert->getBeginDatetime() ? $concert->getBeginDatetime()->format('Y-m-d H:i:s') : null,
+                'end_datetime' => $concert->getEndDatetime() ? $concert->getEndDatetime()->format('Y-m-d H:i:s') : null,
+                'description' => $concert->getContent(),
+                'image' => $this->getParameter('app.base_url') . '/images/ns_img_content/' . $concert->getImageName(),
+            ];
+        }
+
+        return $this->json($data, Response::HTTP_OK);
+    }
     
     
 }

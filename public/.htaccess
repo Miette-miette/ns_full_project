@@ -19,7 +19,7 @@ DirectoryIndex index.php
 
 <IfModule mod_rewrite.c>
 
-    Header always set Access-Control-Allow-Origin "http://localhost:8080"
+    Header always set Access-Control-Allow-Origin "http://localhost:5501"
     Header always set Access-Control-Allow-Credentials "true"
     Header always set Access-Control-Allow-Headers "Content-Type"
     Header always set Content-Type "application/json"
