@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LieuController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<main>
+    <h1>Liste des Lieux</h1>
+    
+    {% for message in app.flashes('success')%}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+
+    <table class="table table-hover">
+        {% for locations in location %}
+            <thead>
+                <th>Article {{locations.id}}</th>
+            </thead>
+            <tbody class="d-flex flex-row">
+                <tr class="table-primary d-flex flex-column">
+                    <td>
+                        <h2>{{locations.name}}</h2>
+                    </td>
+                    
+                </tr>
+                <tr class="table-primary d-flex flex-column">
+                    <td><img src="{{vich_uploader_asset(locations, 'imageFile')}}" width="200px"></td>
+                    <td><input type="button" value="Modifier la fiche"></td>
+                    <td><input type="button" value="Supprimer la fiche"></td>
+                </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+    <div class="navigation">
+        {{ knp_pagination_render(location) }}
+    </div>
+    <div class="count">
+        <p> Nombre de fiches: {{location.getTotalItemCount}}</p>
+    </div>
+</main>
+{% endblock %}

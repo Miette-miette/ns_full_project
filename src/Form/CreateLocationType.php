@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Validator\Constraints as Assert;
-use Webmozart\Assert\Assert as AssertAssert;
+
 
 class CreateLocationType extends AbstractType
 {

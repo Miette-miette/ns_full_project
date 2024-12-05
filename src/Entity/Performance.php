@@ -20,6 +20,10 @@ class Performance
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $titre = null;
 
+    #[ORM\ManyToOne(inversedBy: 'performances')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Location $Location = null;
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $begin_datetime = null;
 
@@ -128,5 +132,17 @@ class Performance
     public function getImageName(): ?string
     {
         return $this->img;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->Location;
+    }
+
+    public function setLocation(?Location $Location): static
+    {
+        $this->Location = $Location;
+
+        return $this;
     }
 }

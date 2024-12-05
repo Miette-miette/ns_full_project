@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Location;
 use App\Form\CreateLocationType;
+use App\Repository\LocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,13 +29,27 @@ class LieuController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash(
-                'sucsess',
+                'success',
                 'Le lieu à été ajouté!'
             );
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_location_list');
         }
 
         return $this->render('creation\create_data.html.twig',['form' => $form->createView(),'controller_title' => 'Nouveau lieu']);
+    }
+
+    #[Route('/location/list', name: 'app_location_list')]
+    public function ShowAll(LocationRepository $repository, PaginatorInterface $paginator, Request $request): Response
+    {
+        //pagination 2 par page
+        $location = $paginator->paginate(
+            $repository->findAll(), 
+            $request->query->getInt('page', 1), 
+            2 
+        );
+
+        return $this->render('location_list/index.html.twig', [
+            'location' =>$location]);
     }
 }
