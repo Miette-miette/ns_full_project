@@ -20,8 +20,7 @@ class Concert
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $lieu = null;
+
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $begin_datetime = null;
@@ -42,6 +41,10 @@ class Concert
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'concerts')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Location $Location = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,17 +62,6 @@ class Concert
         return $this;
     }
 
-    public function getLieu(): ?string
-    {
-        return $this->lieu;
-    }
-
-    public function setLieu(?string $lieu): static
-    {
-        $this->lieu = $lieu;
-
-        return $this;
-    }
 
     public function getBeginDatetime(): ?\DateTimeInterface
     {
@@ -140,5 +132,17 @@ class Concert
     public function getImageName(): ?string
     {
         return $this->img;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->Location;
+    }
+
+    public function setLocation(?Location $Location): static
+    {
+        $this->Location = $Location;
+
+        return $this;
     }
 }

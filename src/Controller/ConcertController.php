@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Concert;
-use App\Form\CreateDataConcertType;
+use App\Form\ConcertType;
 use App\Repository\ConcertRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -11,10 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class ConcertController extends AbstractController
 {
@@ -22,7 +18,7 @@ class ConcertController extends AbstractController
     public function createDataConcert(EntityManagerInterface $entityManager,Request $request)
     {
         $concert = new Concert();
-        $form = $this->createForm(CreateDataConcertType::class, $concert);
+        $form = $this->createForm(ConcertType::class, $concert);
 
         $form->handleRequest($request);
 
@@ -36,21 +32,6 @@ class ConcertController extends AbstractController
         }
 
         return $this->render('creation\create_data.html.twig',['form' => $form->createView(), 'controller_title' => 'Nouveau Concert']);
-    }
-
-    #[Route('/concert/data', name: 'app_concert_data')]
-    public function encodeJSON(ConcertRepository $repository): Response
-    {
-        //Création de l'encodeur JSON
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
-
-        $concerts= $repository->findAll();
-
-       
-        return $this->json($concerts); /*$serializer->serialize(, 'json'));*/
-        
     }
 
     #[Route('/concert/list', name: 'app_concert_list')]
@@ -77,11 +58,11 @@ class ConcertController extends AbstractController
             $data[] = [
                 'id' => $concert->getId(),
                 'title' => $concert->getTitre(),
-                'location' => $concert->getLieu(),
+                'Location' => $concert->getLocation(),
                 'begin_datetime' => $concert->getBeginDatetime() ? $concert->getBeginDatetime()->format('Y-m-d H:i:s') : null,
                 'end_datetime' => $concert->getEndDatetime() ? $concert->getEndDatetime()->format('Y-m-d H:i:s') : null,
                 'description' => $concert->getContent(),
-                'image' => $this->getParameter('app.base_url') . '/images/ns_img_content/' . $concert->getImageName(),
+                'image' => $this->getParameter('app.base_url') . '/public/images/ns_img_content/' . $concert->getImageName(),
             ];
         }
 

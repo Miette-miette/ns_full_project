@@ -11,10 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class AtelierController extends AbstractController
 {
@@ -38,21 +34,6 @@ class AtelierController extends AbstractController
         return $this->render('creation\create_data.html.twig',['form' => $form->createView(), 'controller_title' => 'Nouvel Atelier']);
     }
 
-    #[Route('/atelier/data', name: 'app_atelier_data')]
-    public function encodeJSON(AtelierRepository $repository): Response
-    {
-        //Création de l'encodeur JSON
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
-
-        $articles= $repository->findAll();
-
-       
-        return $this->json($articles); /*$serializer->serialize(, 'json'));*/
-        
-    }
-
     #[Route('/atelier/list', name: 'app_atelier_list')]
     public function ShowAll(AtelierRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -65,6 +46,27 @@ class AtelierController extends AbstractController
 
         return $this->render('atelier_list/index.html.twig', [
             'atelier' =>$atelier]);
+    }
+
+    #[Route('/api/ateliers', name: 'api_ateliers', methods: ['GET'])]
+    public function getAtelierAPI(AtelierRepository $repository): Response
+    {
+        $ateliers = $repository->findAll();
+        $data = [];
+
+        foreach ($ateliers as $atelier) {
+            $data[] = [
+                'id' => $atelier->getId(),
+                'title' => $atelier->getTitre(),
+                'Location' => $atelier->getLieu(),
+                'begin_datetime' => $atelier->getBeginDatetime() ? $atelier->getBeginDatetime()->format('Y-m-d H:i:s') : null,
+                'end_datetime' => $atelier->getEndDatetime() ? $atelier->getEndDatetime()->format('Y-m-d H:i:s') : null,
+                'description' => $atelier->getContent(),
+                'image' => $this->getParameter('app.base_url') . '/public/images/ns_img_content/' . $atelier->getImageName(),
+            ];
+        }
+
+        return $this->json($data, Response::HTTP_OK);
     }
 
 }

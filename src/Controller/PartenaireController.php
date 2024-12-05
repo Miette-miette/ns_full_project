@@ -35,22 +35,7 @@ class PartenaireController extends AbstractController
             return new Response("Partenaire ajouté!");
         }
 
-        return $this->render('partenaire\index.html.twig',['form' => $form->createView(), 'controller_title' => 'Nouveau Partenaire']);
-    }
-
-    #[Route('/partenaire/data', name: 'app_partenaire_data')]
-    public function encodeJSON(PartenaireRepository $repository): Response
-    {
-        //Création de l'encodeur JSON
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
-
-        $concerts= $repository->findAll();
-
-       
-        return $this->json($concerts); /*$serializer->serialize(, 'json'));*/
-        
+        return $this->render('creation/create_data.html.twig',['form' => $form->createView(), 'controller_title' => 'Nouveau Partenaire']);
     }
 
     #[Route('/partenaire/list', name: 'app_partenaire_list')]
@@ -67,4 +52,26 @@ class PartenaireController extends AbstractController
 
         'partenaire'=>$partenaire]);
     }
+
+    #[Route('/api/partenaires', name: 'api_partenaires', methods: ['GET'])]
+    public function getPartenairesAPI(PartenaireRepository $repository): Response
+    {
+        $partenaires = $repository->findAll();
+        $data = [];
+
+        foreach ($partenaires as $partenaire) {
+            $data[] = [
+                'id' => $partenaire->getId(),
+                'title' => $partenaire->getTitre(),
+                'Location' => $partenaire->getLieu(),
+                'begin_datetime' => $partenaire->getBeginDatetime() ? $partenaire->getBeginDatetime()->format('Y-m-d H:i:s') : null,
+                'end_datetime' => $partenaire->getEndDatetime() ? $partenaire->getEndDatetime()->format('Y-m-d H:i:s') : null,
+                'description' => $partenaire->getContent(),
+                'image' => $this->getParameter('app.base_url') . '/public/images/ns_img_content/' . $partenaire->getImageName(),
+            ];
+        }
+
+        return $this->json($data, Response::HTTP_OK);
+    }
+    
 }

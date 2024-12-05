@@ -19,8 +19,8 @@ class CreatePerformanceType extends AbstractType
             ->add('titre', TextType::class,[
                 'label' => "Nom de la performance"
             ])
-            ->add('lieu', TextType::class,[
-                'label' => "Lieu ou se déroule la performance"
+            ->add('Location', TextType::class,[
+                'label' => "Location ou se déroule la performance"
                 //Liste à choix à inclure
             ])
             ->add('begin_datetime', null, [

@@ -22,7 +22,7 @@ final class Version20241009130833 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE atelier CHANGE content content VARCHAR(6000) DEFAULT NULL');
         $this->addSql('ALTER TABLE concert CHANGE content content VARCHAR(6000) DEFAULT NULL');
-        $this->addSql('ALTER TABLE lieu CHANGE content content VARCHAR(6000) DEFAULT NULL');
+        $this->addSql('ALTER TABLE Location CHANGE content content VARCHAR(6000) DEFAULT NULL');
         $this->addSql('ALTER TABLE partenaire CHANGE content content VARCHAR(6000) DEFAULT NULL');
         $this->addSql('ALTER TABLE performance CHANGE content content VARCHAR(6000) DEFAULT NULL');
     }
@@ -32,7 +32,7 @@ final class Version20241009130833 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE atelier CHANGE content content VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE concert CHANGE content content VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE lieu CHANGE content content VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE Location CHANGE content content VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE partenaire CHANGE content content VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE performance CHANGE content content VARCHAR(255) DEFAULT NULL');
     }

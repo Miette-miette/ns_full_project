@@ -12,7 +12,12 @@
     <h1>{{controller_title}}</h1>
     
     <div>
-        {{form(form)}}
+        {{ form_start(form) }}
+        <div class="form-error">
+            {{ form_errors(form) }}
+        </div>
+
+        {{ form_end(form) }}
     </div>
 </div>
 {% endblock %}

@@ -11,10 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 class ArticleController extends AbstractController
 {
@@ -39,22 +35,6 @@ class ArticleController extends AbstractController
         return $this->render('creation\create_data.html.twig',['form' => $form->createView(), 'controller_title' => 'Nouvel Article']);
     }
 
-
-    // Function to encode the data into JSON
-    #[Route('/article/data', name: 'app_article_data')]  
-    public function encodeJSON(ArticleRepository $repository): Response
-    {
-        $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = [new ObjectNormalizer()];
-        $serializer = new Serializer($normalizers, $encoders);
-
-        $articles= $repository->findAll();
-
-       
-        return $this->json($articles); /*$serializer->serialize(, 'json'));*/
-        
-    }
-
     // Show all articles
     #[Route('/article/list', name: 'app_article_list')]
     public function ShowAll(ArticleRepository $repository,PaginatorInterface $paginator, Request $request): Response
@@ -69,6 +49,26 @@ class ArticleController extends AbstractController
         return $this->render('article/article_list.html.twig',[
 
         'articles'=>$articles]);
+    }
+
+    #[Route('/api/articles', name: 'api_articles', methods: ['GET'])]
+    public function getConcertsAPI(ArticleRepository $repository): Response
+    {
+        $articles = $repository->findAll();
+        $data = [];
+
+        foreach ($articles as $article) {
+            $data[] = [
+                'id' => $article->getId(),
+                'title' => $article->getTitre(),
+                'subtitle' => $article->getSousTitre(),
+                'chapeau' => $article->getChapeau(),
+                'description' => $article->getContent(),
+                'image' => $this->getParameter('app.base_url') . '/images/ns_img_content/' . $article->getImageName(),
+            ];
+        }
+
+        return $this->json($data, Response::HTTP_OK);
     }
 
 }

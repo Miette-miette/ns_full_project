@@ -20,9 +20,10 @@ class Atelier
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $lieu = null;
-
+    #[ORM\ManyToOne(inversedBy: 'ateliers')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Location $Location = null;
+    
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $begin_datetime = null;
 
@@ -41,6 +42,8 @@ class Atelier
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    
 
     public function getId(): ?int
     {
@@ -61,12 +64,12 @@ class Atelier
 
     public function getLieu(): ?string
     {
-        return $this->lieu;
+        return $this->Location;
     }
 
-    public function setLieu(?string $lieu): static
+    public function setLieu(?string $Location): static
     {
-        $this->lieu = $lieu;
+        $this->Location = $Location;
 
         return $this;
     }
@@ -152,5 +155,17 @@ class Atelier
     public function getImageName(): ?string
     {
         return $this->img;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->Location;
+    }
+
+    public function setLocation(?Location $Location): static
+    {
+        $this->Location = $Location;
+
+        return $this;
     }
 }

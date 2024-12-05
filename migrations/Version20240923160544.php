@@ -21,13 +21,13 @@ final class Version20240923160544 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE article ADD sous_titre VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE lieu ADD type_de_lieu VARCHAR(30) DEFAULT NULL');
+        $this->addSql('ALTER TABLE Location ADD type_de_lieu VARCHAR(30) DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE article DROP sous_titre');
-        $this->addSql('ALTER TABLE lieu DROP type_de_lieu');
+        $this->addSql('ALTER TABLE Location DROP type_de_lieu');
     }
 }

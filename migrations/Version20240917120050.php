@@ -20,7 +20,7 @@ final class Version20240917120050 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE performance (id INT AUTO_INCREMENT NOT NULL, titre VARCHAR(30) DEFAULT NULL, lieu VARCHAR(20) DEFAULT NULL, begin_datetime DATETIME DEFAULT NULL, end_datetime DATETIME DEFAULT NULL, content VARCHAR(255) DEFAULT NULL, img LONGBLOB DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE performance (id INT AUTO_INCREMENT NOT NULL, titre VARCHAR(30) DEFAULT NULL, Location VARCHAR(20) DEFAULT NULL, begin_datetime DATETIME DEFAULT NULL, end_datetime DATETIME DEFAULT NULL, content VARCHAR(255) DEFAULT NULL, img LONGBLOB DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void

@@ -20,9 +20,6 @@ class Performance
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $lieu = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $begin_datetime = null;
 
@@ -61,17 +58,6 @@ class Performance
         return $this;
     }
 
-    public function getLieu(): ?string
-    {
-        return $this->lieu;
-    }
-
-    public function setLieu(?string $lieu): static
-    {
-        $this->lieu = $lieu;
-
-        return $this;
-    }
 
     public function getBeginDatetime(): ?\DateTimeInterface
     {

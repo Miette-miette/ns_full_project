@@ -18,8 +18,8 @@ class CreateAtelierType extends AbstractType
             ->add('titre',  TextType::class,[
                 'label' => "Nom de l'atelier"
             ])
-            ->add('lieu',  TextType::class,[
-                'label' => "Lieu où se déroule l'atelier"
+            ->add('Location',  TextType::class,[
+                'label' => "Location où se déroule l'atelier"
             ])
             ->add('begin_datetime', null, [
                 'widget' => 'single_text',
