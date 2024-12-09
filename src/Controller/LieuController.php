@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Location;
 use App\Form\CreateLocationType;
 use App\Repository\LocationRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,7 +50,49 @@ class LieuController extends AbstractController
             2 
         );
 
-        return $this->render('location_list/index.html.twig', [
+        return $this->render('location/list.html.twig', [
             'location' =>$location]);
+    }
+
+    #[Route('/location/edit/{id}', name: 'app_location_edit', methods: ['GET','POST'])]
+    public function edit(LocationRepository $repository, int $id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $location = $repository->findOneBy(["id" => $id]);
+        $form = $this->createForm(CreateLocationType::class, $location);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()&& $form->isValid())
+        {
+            $locationData = $form->getData();
+            $entityManager->persist($locationData);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Le lieu à été modifié avec succès!'
+            );
+
+            return $this->redirectToRoute('app_location_list');
+        }
+
+        return $this->render('edition/edit.html.twig', [
+            'form' => $form->createView(),
+            'controller_title' => 'Modifier un lieu'
+        ]);
+    }
+
+    #[Route('/location/delete/{id}', name: 'app_location_delete', methods: ['GET','POST'])]
+    public function delete(EntityManagerInterface $entityManager, Location $location) : Response
+    {
+        $entityManager->remove($location);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'Le lieu à été supprimé avec succès!'
+        );
+
+
+        return $this->redirectToRoute('app_location_list');
     }
 }

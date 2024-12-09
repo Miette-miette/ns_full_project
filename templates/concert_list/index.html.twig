@@ -8,6 +8,12 @@
 <main>
     <h1>Listes des concerts</h1>
 
+    {% for message in app.flashes('success')%}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+
     <table class="table table-hover">
         {% for concert in concerts %}
             <thead>

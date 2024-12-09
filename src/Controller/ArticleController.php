@@ -71,6 +71,50 @@ class ArticleController extends AbstractController
         return $this->json($data, Response::HTTP_OK);
     }
 
+    #[Route('/article/edit/{id}', name: 'app_article_edit', methods: ['GET','POST'])]
+    public function edit(ArticleRepository $repository, int $id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $article = $repository->findOneBy(["id" => $id]);
+        $form = $this->createForm(CreateArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()&& $form->isValid())
+        {
+            $articleData = $form->getData();
+            $entityManager->persist($articleData);
+            
+            $entityManager->flush();
+            
+
+            $this->addFlash(
+                'success',
+                'L\'article à été modifié avec succès!'
+            );
+
+            return $this->redirectToRoute('app_article_list');
+        }
+
+        return $this->render('edition/edit.html.twig', [
+            'form' => $form->createView(),
+            'controller_title' => 'Modifier un article'
+        ]);
+    }
+
+    #[Route('/article/delete/{id}', name: 'app_article_delete', methods: ['GET','POST'])]
+    public function delete(EntityManagerInterface $entityManager, Article $article) : Response
+    {
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'L\'article à été supprimé avec succès!'
+        );
+
+
+        return $this->redirectToRoute('app_article_list');
+    }
+
 }
 
 

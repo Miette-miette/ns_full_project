@@ -69,4 +69,46 @@ class AtelierController extends AbstractController
         return $this->json($data, Response::HTTP_OK);
     }
 
+    #[Route('/atelier/edit/{id}', name: 'app_atelier_edit', methods: ['GET','POST'])]
+    public function edit(AtelierRepository $repository, int $id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $atelier = $repository->findOneBy(["id" => $id]);
+        $form = $this->createForm(CreateAtelierType::class, $atelier);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()&& $form->isValid())
+        {
+            $atelierData = $form->getData();
+            $entityManager->persist($atelierData);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'L\'atelier à été modifié avec succès!'
+            );
+
+            return $this->redirectToRoute('app_atelier_list');
+        }
+
+        return $this->render('edition/edit.html.twig', [
+            'form' => $form->createView(),
+            'controller_title' => 'Modifier l\'atelier'
+        ]);
+    }
+
+    #[Route('/atelier/delete/{id}', name: 'app_atelier_delete', methods: ['GET','POST'])]
+    public function delete(EntityManagerInterface $entityManager, Atelier $atelier) : Response
+    {
+        $entityManager->remove($atelier);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'L\'atelier à été supprimé avec succès!'
+        );
+
+
+        return $this->redirectToRoute('app_atelier_list');
+    }
+
 }

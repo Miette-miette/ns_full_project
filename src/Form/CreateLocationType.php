@@ -82,7 +82,7 @@ class CreateLocationType extends AbstractType
             ])
             ->add('submit',SubmitType::class,[
                 'label' => "Ajouter un lieu",
-            ]);
+            ]); 
         ;
     }
 

@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[UniqueEntity('id')]
 #[Vich\Uploadable]
 class Article
 {
@@ -16,13 +18,13 @@ class Article
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 30, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $titre = null;
 
     #[ORM\Column(length: 1000, nullable: true)]
     private ?string $chapeau = null;
 
-    #[ORM\Column(length: 6000, nullable: true)]
+    #[ORM\Column(length: 20000, nullable: true)]
     private ?string $content = null;
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.

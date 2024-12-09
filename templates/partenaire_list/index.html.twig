@@ -7,6 +7,12 @@
 <main>
     <h1>Liste des Partenaires</h1>
 
+    {% for message in app.flashes('success')%}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+
     <table class="table table-hover">
         {% for partenaires in partenaire %}
             <thead>

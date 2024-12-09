@@ -31,8 +31,8 @@
                 </tr>
                 <tr class="table-primary d-flex flex-column">
                     <td><img src="{{vich_uploader_asset(locations, 'imageFile')}}" width="200px"></td>
-                    <td><input type="button" value="Modifier la fiche"></td>
-                    <td><input type="button" value="Supprimer la fiche"></td>
+                    <td><a class="button-style" href="{{path("app_location_edit", {'id' : locations.id })}}">Modifier la fiche</a></td>
+                    <td><a class="button-style" href="{{path("app_location_delete", {'id' : locations.id })}}">Supprimer la fiche</a></td>
                 </tr>
             </tbody>
         {% endfor %}

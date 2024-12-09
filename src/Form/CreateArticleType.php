@@ -34,10 +34,10 @@ class CreateArticleType extends AbstractType
                 'attr' =>[
                     'class'=> 'form-control',
                     'minlenght' => '2',
-                    'maxlenght' => '50',
+                    'maxlenght' => '255',
                 ],
                 'constraints' => [
-                    new Assert\Length(['min'=> 2, 'max'=> 50]),
+                    new Assert\Length(['min'=> 2, 'max'=> 255]),
                     new Assert\NotBlank()
                 ]
             ])
@@ -46,10 +46,10 @@ class CreateArticleType extends AbstractType
                 'attr' =>[
                     'class'=> 'form-control',
                     'minlenght' => '2',
-                    'maxlenght' => '50',
+                    'maxlenght' => '1000',
                 ],
                 'constraints' => [
-                    new Assert\Length(['min'=> 2, 'max'=> 50]),
+                    new Assert\Length(['min'=> 2, 'max'=> 1000]),
                     new Assert\NotBlank()
                 ]
             ])
@@ -58,10 +58,10 @@ class CreateArticleType extends AbstractType
                 'attr' =>[
                     'class'=> 'form-control',
                     'minlenght' => '2',
-                    'maxlenght' => '50',
+                    'maxlenght' => '20000',
                 ],
                 'constraints' => [
-                    new Assert\Length(['min'=> 2, 'max'=> 50]),
+                    new Assert\Length(['min'=> 2, 'max'=> 20000]),
                     new Assert\NotBlank()
                 ]
             ])          

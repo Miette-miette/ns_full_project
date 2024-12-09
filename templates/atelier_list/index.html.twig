@@ -6,6 +6,12 @@
 <main>
     <h1>Liste des Ateliers</h1>
 
+    {% for message in app.flashes('success')%}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+
     <table class="table table-hover">
         {% for ateliers in atelier %}
             <thead>
@@ -36,8 +42,8 @@
                 </tr>
                 <tr class="table-primary d-flex flex-column">
                     <td><img src="{{vich_uploader_asset(ateliers, 'imageFile')}}" width="200px"></td>
-                    <td><input type="button" value="Modifier la fiche"></td>
-                    <td><input type="button" value="Supprimer la fiche"></td>
+                    <td><a class="button-style" href="{{path("app_atelier_edit", {'id' : ateliers.id })}}">Modifier la fiche</a></td>
+                    <td><a class="button-style" href="{{path("app_atelier_delete", {'id' : ateliers.id })}}">Supprimer la fiche</a></td>
                 </tr>
             </tbody>
         {% endfor %}

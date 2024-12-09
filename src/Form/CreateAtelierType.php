@@ -71,7 +71,10 @@ class CreateAtelierType extends AbstractType
             ->add('imageFile',VichImageType::class,[
                 'label' => "Image d'illustration de l'atelier"
             ])
-            ->add('submit',SubmitType::class);
+
+            ->add('submit',SubmitType::class,[
+                'label' => "Ajouter un atelier",
+            ]);
         ;
     }
 
