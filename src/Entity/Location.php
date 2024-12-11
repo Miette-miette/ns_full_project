@@ -75,10 +75,17 @@ class Location
     #[ORM\OneToMany(targetEntity: Concert::class, mappedBy: 'Location')]
     private Collection $concerts;
 
+    /**
+     * @var Collection<int, Performance>
+     */
+    #[ORM\OneToMany(targetEntity: Performance::class, mappedBy: 'location')]
+    private Collection $performances;
+
     public function __construct()
     {
         $this->ateliers = new ArrayCollection();
         $this->concerts = new ArrayCollection();
+        $this->performances = new ArrayCollection();
     }
 
 
@@ -299,6 +306,36 @@ class Location
             // set the owning side to null (unless already changed)
             if ($concert->getLocation() === $this) {
                 $concert->setLocation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Performance>
+     */
+    public function getPerformances(): Collection
+    {
+        return $this->performances;
+    }
+
+    public function addPerformance(Performance $performance): static
+    {
+        if (!$this->performances->contains($performance)) {
+            $this->performances->add($performance);
+            $performance->setLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removePerformance(Performance $performance): static
+    {
+        if ($this->performances->removeElement($performance)) {
+            // set the owning side to null (unless already changed)
+            if ($performance->getLocation() === $this) {
+                $performance->setLocation(null);
             }
         }
 

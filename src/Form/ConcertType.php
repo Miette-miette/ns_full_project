@@ -20,7 +20,7 @@ class ConcertType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class,[
-                'label' => "Nom de l'artiste/ groupe",
+                'label' => "Nom de l'artiste/ groupe", 
                 'attr' =>[
                     'class'=> 'form-control',
                     'minlenght' => '2',
@@ -31,7 +31,7 @@ class ConcertType extends AbstractType
                     new Assert\NotBlank()
                 ]
             ])
-            
+             
             ->add('Location', EntityType::class, [
                 'class' => Location::class,
                 'choice_label' => 'name',

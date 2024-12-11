@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Location;
 use App\Form\CreateLocationType;
 use App\Repository\LocationRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

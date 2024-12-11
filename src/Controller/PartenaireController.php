@@ -73,5 +73,47 @@ class PartenaireController extends AbstractController
 
         return $this->json($data, Response::HTTP_OK);
     }
+
+    #[Route('/partenaire/edit/{id}', name: 'app_partenaire_edit', methods: ['GET','POST'])]
+    public function edit(PartenaireRepository $repository, int $id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $partenaire = $repository->findOneBy(["id" => $id]);
+        $form = $this->createForm(CreatePartenaireType::class, $partenaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()&& $form->isValid())
+        {
+            $partenaireData = $form->getData();
+            $entityManager->persist($partenaireData);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Le partenaire à été modifié avec succès!'
+            );
+
+            return $this->redirectToRoute('app_partenaire_list');
+        }
+
+        return $this->render('edition/edit.html.twig', [
+            'form' => $form->createView(),
+            'controller_title' => 'Modifier le partenaire'
+        ]);
+    }
+
+    #[Route('/partenaire/delete/{id}', name: 'app_partenaire_delete', methods: ['GET','POST'])]
+    public function delete(EntityManagerInterface $entityManager, Partenaire $partenaire) : Response
+    {
+        $entityManager->remove($partenaire);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'Le partenaire à été supprimé avec succès!'
+        );
+
+
+        return $this->redirectToRoute('app_partenaire_list');
+    }
     
 }

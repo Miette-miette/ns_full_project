@@ -17,6 +17,17 @@ Customize form rendering (add label/ error and more)
 https://symfony.com/doc/current/form/form_customization.html
 
 
+##USERS
+
+Security bundle
+
+https://symfony.com/doc/current/security.html
+
+User Providers
+
+https://symfony.com/doc/current/security/user_providers.html
+
+
 ##CORS ERROR
 
 Understand the CORS error

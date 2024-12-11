@@ -25,8 +25,8 @@
                         <h2>{{concert.titre}}</h2>
                     </td>
                     <td>
-                        <h3>Location:</h3>
-                        <p>{{concert.Location}}</p>
+                        <h3>Lieu:</h3>
+                        {#<p>{{concert.location}}</p>#}
                     </td>
                     <td>
                         <h3>Date de début:</h3>
@@ -46,8 +46,8 @@
 
                 <tr class="table-primary d-flex flex-column">
                     <td><img src="{{vich_uploader_asset(concert, 'imageFile')}}" width="200px"></td>
-                    <td><input type="button" value="Modifier la fiche"></td>
-                    <td><input type="button" value="Supprimer la fiche"></td>
+                     <td><a class="button-style" href="{{path("app_concert_edit", {'id' : concert.id })}}">Modifier la fiche</a></td>
+                    <td><a class="button-style" href="{{path("app_concert_delete", {'id' : concert.id })}}">Supprimer la fiche</a></td>
                 </tr>
             </tbody>
             

@@ -68,6 +68,48 @@ class ConcertController extends AbstractController
 
         return $this->json($data, Response::HTTP_OK);
     }
+
+    #[Route('/concert/edit/{id}', name: 'app_concert_edit', methods: ['GET','POST'])]
+    public function edit(ConcertRepository $repository, int $id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $concert = $repository->findOneBy(["id" => $id]);
+        $form = $this->createForm(ConcertType::class, $concert);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()&& $form->isValid())
+        {
+            $concertData = $form->getData();
+            $entityManager->persist($concertData);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Le concert à été modifié avec succès!'
+            );
+
+            return $this->redirectToRoute('app_concert_list');
+        }
+
+        return $this->render('edition/edit.html.twig', [
+            'form' => $form->createView(),
+            'controller_title' => 'Modifier le concert'
+        ]);
+    }
+
+    #[Route('/concert/delete/{id}', name: 'app_concert_delete', methods: ['GET','POST'])]
+    public function delete(EntityManagerInterface $entityManager, Concert $concert) : Response
+    {
+        $entityManager->remove($concert);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'Le concert à été supprimé avec succès!'
+        );
+
+
+        return $this->redirectToRoute('app_concert_list');
+    }
     
     
 }

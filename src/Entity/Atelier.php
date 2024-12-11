@@ -19,7 +19,7 @@ class Atelier
 
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $titre = null;
-
+ 
     #[ORM\ManyToOne(inversedBy: 'ateliers')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Location $Location = null;

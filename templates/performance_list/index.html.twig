@@ -35,7 +35,8 @@
                 </tr>
                 <tr class="table-primary d-flex flex-column">
                     <td><img src="{{vich_uploader_asset(performances, 'imageFile')}}" width="200px"></td>
-                    <td><input type="button" value="Modifier la fiche"></td>
+                     <td><a class="button-style" href="{{path("app_performance_edit", {'id' : performances.id })}}">Modifier la fiche</a></td>
+                    <td><a class="button-style" href="{{path("app_performance_delete", {'id' : performances.id })}}">Supprimer la fiche</a></td>
                 </tr>
             </tbody>
         {% endfor %}

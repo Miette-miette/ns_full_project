@@ -37,8 +37,8 @@
                     <td>
                         <h3>Image:</h3>
                         <img src="{{vich_uploader_asset(partenaires, 'imageFile')}}" width="200px" >
-                        <td><input type="button" value="Modifier la fiche"></td>
-                        <td><input type="button" value="Supprimer la fiche"></td>
+                        <td><a class="button-style" href="{{path("app_partenaire_edit", {'id' : partenaires.id })}}">Modifier la fiche</a></td>
+                        <td><a class="button-style" href="{{path("app_partenaire_delete", {'id' : partenaires.id })}}">Supprimer la fiche</a></td>
                     </td>
                 </tr>
             </tbody>
