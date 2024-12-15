@@ -27,6 +27,10 @@ User Providers
 
 https://symfony.com/doc/current/security/user_providers.html
 
+Entity Listener
+
+https://symfony.com/bundles/DoctrineBundle/current/entity-listeners.html
+
 
 ##CORS ERROR
 
