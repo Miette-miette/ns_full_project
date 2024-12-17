@@ -47,6 +47,17 @@ Bundle NelmioCors
 https://symfony.com/bundles/NelmioCorsBundle/current/index.html
 
 
+##TESTS
+
+Fixtures
+
+https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html
+
+Fake data:
+
+https://fakerphp.org/
+
+
 
 ##BOOTSWATCH THEME
 
